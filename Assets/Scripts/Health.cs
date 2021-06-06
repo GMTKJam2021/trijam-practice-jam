@@ -32,6 +32,9 @@ public class Health : MonoBehaviour
         IsDead = true;
 
         // play animations
+
+        // TODO: replace this
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -39,7 +42,7 @@ public class Health : MonoBehaviour
         Damager damager = other.collider.GetComponent<Damager>();
         if (damager != null)
         {
-            DealDamage(damager.Damage);
+            DealDamage(damager.GetDamage());
         }
     }
 }
