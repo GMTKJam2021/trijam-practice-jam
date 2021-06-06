@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerInteraction : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Button"))
+        {
+            collision.GetComponent<ButtonController>().Pressed();
+        }
+
+        if (collision.CompareTag("Key"))
+        {
+            collision.GetComponent<KeyController>().Unlock();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Button"))
+        {
+            collision.GetComponent<ButtonController>().Unpressed();
+        }
+    }
+}
