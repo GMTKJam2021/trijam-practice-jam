@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(moveInput.normalized * moveSpeed, ForceMode2D.Force);
+        rb.velocity = moveInput.normalized * moveSpeed;
+        //rb.AddForce(moveInput.normalized * moveSpeed, ForceMode2D.Force);
     }
 }
