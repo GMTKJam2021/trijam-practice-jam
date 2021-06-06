@@ -29,6 +29,8 @@ public class Damager : MonoBehaviour
     private void Awake()
     {
         Debug.Assert(GetDamage(false) > 0);
+        // If the object is destroyed after hitting something, it logically should after be deleted after damaging something
+        Debug.Assert(destroyAfterImpact ? deleteAfterDamaging : false);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
