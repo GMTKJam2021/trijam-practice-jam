@@ -27,6 +27,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             collision.GetComponent<KeyController>().Unlock();
         }
+
+        if (collision.CompareTag("Noise"))
+        {
+            collision.GetComponent<NoiseController>().StartNoise();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -22,6 +22,10 @@ public class KeyController : MonoBehaviour
         doorCol = door.GetComponent<BoxCollider2D>();
         color = keyRend.color;
     }
+
+    /// <summary>
+    /// Opens the door associated to the key.
+    /// </summary>
     public void Unlock()
     {
         color.a = .1f;

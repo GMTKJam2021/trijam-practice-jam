@@ -28,6 +28,7 @@ public class ButtonController : MonoBehaviour
     /// </summary>
     public void Pressed()
     {
+        StopAllCoroutines();
         color.a = .1f;
         buttonRend.color = doorRend.color = color;
         doorCol.enabled = false;
@@ -41,6 +42,9 @@ public class ButtonController : MonoBehaviour
         StartCoroutine(CloseDoor());
     }
 
+    /// <summary>
+    /// Closes the door gradually over 3 seconds.
+    /// </summary>
     IEnumerator CloseDoor()
     {
         color.a = .2f;
@@ -67,6 +71,7 @@ public class ButtonController : MonoBehaviour
     /// </summary>
     public void Reset()
     {
+        StopAllCoroutines();
         color.a = 1f;
         buttonRend.color = doorRend.color = color;
         doorCol.enabled = true;
