@@ -13,24 +13,17 @@ public class GhostController : MonoBehaviour
     private int moveX;
     private int moveY;
     private float moveSpeed;
-    [SerializeField] private Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {        
-        //Initializes all queues
-        timeRecordX = new Queue<float>();
-        timeRecordY = new Queue<float>();
-        moveRecordX = new Queue<int>();
-        moveRecordY = new Queue<int>();
-
-        //Starts timers
-        timerX = timerY = 0;
-
+        //Sets rigidbody
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //Update timers
         timerX -= Time.deltaTime;
@@ -39,13 +32,33 @@ public class GhostController : MonoBehaviour
         //Adds new moves
         if(timerX <= 0)
         {
-            timerX = timeRecordX.Dequeue();
-            moveX = moveRecordX.Dequeue();
+            if (timeRecordX.Count != 0)
+            {
+                timerX = timeRecordX.Dequeue();
+                moveX = moveRecordX.Dequeue();
+            }
+            else if (timeRecordY.Count == 0)
+                Destroy(gameObject);
+            else
+            {
+                timerX = 100;
+                moveX = 0;
+            }
         }
         if (timerY <= 0)
         {
-            timerY = timeRecordY.Dequeue();
-            moveY = moveRecordY.Dequeue();
+            if (timeRecordY.Count != 0)
+            {
+                timerY = timeRecordY.Dequeue();
+                moveY = moveRecordY.Dequeue();
+            }
+            else if (timeRecordX.Count == 0)
+                Destroy(gameObject);
+            else
+            {
+                timerY = 100;
+                moveY = 0;
+            }
         }
     }
 
@@ -65,11 +78,14 @@ public class GhostController : MonoBehaviour
     public void AddRecord(Queue<float> timeInputX, Queue<float> timeInputY, Queue<int> moveInputX, Queue<int> moveInputY, float moveInputSpeed)
     {
         //Sets parameters
-        timeRecordX = timeInputX;
-        timeRecordY = timeInputY;
-        moveRecordX = moveInputX;
-        moveRecordY = moveInputY;
+        timeRecordX = new Queue<float>(timeInputX);
+        timeRecordY = new Queue<float>(timeInputY);
+        moveRecordX = new Queue<int>(moveInputX);
+        moveRecordY = new Queue<int>(moveInputY);
         moveSpeed = moveInputSpeed;
+
+        print(timeRecordX.Count + " moves horizontally");
+        print(timeRecordY.Count + " moves vertically");
 
         //Starts movement
         timerX = timeRecordX.Dequeue();

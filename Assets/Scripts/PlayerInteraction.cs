@@ -17,7 +17,7 @@ public class PlayerInteraction : MonoBehaviour
             GetComponent<PlayerRecorder>().PrintRecord();
 
         if (Input.GetKeyDown(KeyCode.G))
-            GetComponent<PlayerRecorder>().CreateGhost(3);
+            GetComponent<PlayerRecorder>().CreateGhost(10);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
