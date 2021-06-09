@@ -8,6 +8,7 @@ TagManager:
   - Button
   - Noise
   - NoiseCircle
+  - EnemyVision
   layers:
   - Default
   - TransparentFX

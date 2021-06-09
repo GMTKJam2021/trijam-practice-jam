@@ -36,6 +36,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             collision.GetComponent<NoiseController>().StartNoise();
         }
+
+        if (collision.CompareTag("EnemyVision"))
+        {
+            print("Caught!");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
